@@ -8,7 +8,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, password } = registerSchema.parse(body);
 
-    // Check if user already exists
     const existingUser = await db.user.findUnique({
       where: { email },
     });
@@ -20,10 +19,8 @@ export async function POST(req: Request) {
       );
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const user = await db.user.create({
       data: {
         name,

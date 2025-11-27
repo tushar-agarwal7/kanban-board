@@ -50,7 +50,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { title, description, priority } = createTaskSchema.parse(body);
 
-    // Get the highest order number for todo tasks
     const highestOrderTask = await db.task.findFirst({
       where: {
         userId: session.user.id,

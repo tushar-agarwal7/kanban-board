@@ -17,7 +17,6 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
     const body = await req.json();
     const updates = updateTaskSchema.parse(body);
 
-    // Verify task belongs to user
     const task = await db.task.findUnique({
       where: { id },
     });
