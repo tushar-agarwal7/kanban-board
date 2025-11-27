@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎯 KanbanBoard - Professional Task Management
 
-## Getting Started
+A full-stack Kanban board application built with Next.js, TypeScript, and PostgreSQL. Features drag-and-drop task management, user authentication, and a beautiful modern UI.
 
-First, run the development server:
+## ✨ Features
 
+- 🔐 **Secure Authentication** - User registration and login with NextAuth.js
+- 📋 **Drag & Drop** - Intuitive task management with @dnd-kit
+- 🎨 **Modern UI** - Clean, responsive design with Tailwind CSS and Shadcn/ui
+- 🌓 **Dark Mode** - System-aware theme toggle
+- 🏷️ **Task Priorities** - Low, Medium, High priority levels with color coding
+- 💾 **Real-time Persistence** - PostgreSQL database with Prisma ORM
+- 📱 **Fully Responsive** - Works seamlessly on mobile, tablet, and desktop
+- ⚡ **Fast & Optimized** - Built on Next.js 15 with App Router
+- 🔄 **Optimistic Updates** - Instant UI feedback for better UX
+
+## 🚀 Tech Stack
+
+### Frontend
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **Shadcn/ui** - Beautiful, accessible component library
+- **@dnd-kit** - Modern drag-and-drop toolkit
+- **React Hook Form** - Performant form handling
+- **Zod** - Schema validation
+
+### Backend
+- **Next.js API Routes** - Serverless API endpoints
+- **NextAuth.js** - Authentication solution
+- **Prisma** - Type-safe ORM
+- **PostgreSQL** - Relational database
+- **bcryptjs** - Password hashing
+
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- Docker installed (for local PostgreSQL)
+- Git
+
+### Installation
+
+1. **Clone the repository**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tushar-agarwal7/kanbanboard.git
+cd kanbanboard
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Set up environment variables**
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+5. **Run database migrations**
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. **Start the development server**
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+7. **Open your browser**
+Navigate to [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+kanbanboard/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   ├── board/             # Board page (protected)
+│   ├── login/             # Login page
+│   ├── register/          # Register page
+│   └── layout.tsx         # Root layout
+├── components/            # React components
+│   ├── auth/             # Authentication forms
+│   ├── board/            # Kanban board components
+│   ├── layout/           # Layout components
+│   ├── modals/           # Modal dialogs
+│   └── ui/               # Shadcn/ui components
+├── lib/                   # Utility functions
+│   ├── auth.ts           # NextAuth configuration
+│   ├── db.ts             # Prisma client
+│   ├── utils.ts          # Helper functions
+│   └── validations.ts    # Zod schemas
+├── prisma/               # Database schema
+└── types/                # TypeScript types
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔮 Future Enhancements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Team collaboration (share boards)
+- [ ] Task assignments (assign to team members)
+- [ ] Due dates with reminders
+- [ ] Subtasks/checklists
+- [ ] File attachments
+- [ ] Activity history/audit log
+- [ ] Custom board columns
+- [ ] Task labels/tags
+- [ ] Search and filter
+- [ ] Export tasks (CSV, JSON)
+- [ ] Keyboard shortcuts
+- [ ] Mobile app (React Native)
+
+## 📝 License
+
+MIT License - feel free to use this project for learning or your portfolio!
+
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Prisma](https://www.prisma.io/)
+
+---
+
+⭐ If you found this project helpful, please star the repository!
