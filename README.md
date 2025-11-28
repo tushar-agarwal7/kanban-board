@@ -99,21 +99,6 @@ kanbanboard/
 └── types/                # TypeScript types
 ```
 
-## 🔮 Future Enhancements
-
-- [ ] Team collaboration (share boards)
-- [ ] Task assignments (assign to team members)
-- [ ] Due dates with reminders
-- [ ] Subtasks/checklists
-- [ ] File attachments
-- [ ] Activity history/audit log
-- [ ] Custom board columns
-- [ ] Task labels/tags
-- [ ] Search and filter
-- [ ] Export tasks (CSV, JSON)
-- [ ] Keyboard shortcuts
-- [ ] Mobile app (React Native)
-
 ## 📝 License
 
 MIT License - feel free to use this project for learning or your portfolio!
@@ -127,5 +112,3 @@ MIT License - feel free to use this project for learning or your portfolio!
 - [Prisma](https://www.prisma.io/)
 
 ---
-
-⭐ If you found this project helpful, please star the repository!

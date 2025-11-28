@@ -18,7 +18,7 @@ import { AddTaskModal } from "../modals/add-task-modal";
 import { EditTaskModal } from "../modals/edit-task-modal";
 import { DeleteConfirmDialog } from "../modals/delete-confirm-dialog";
 import { Button } from "@/components/ui/button";
-import { Plus, Loader2, Search, Filter, LayoutGrid } from "lucide-react";
+import { Plus, Loader2, Search, Filter, LayoutGrid, Sparkles, Target, TrendingUp } from "lucide-react";
 import { TaskCard } from "./task-card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -172,10 +172,14 @@ export function Board() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-4rem)]">
+      <div className="flex items-center justify-center h-[calc(100vh-4rem)] bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading your tasks...</p>
+          <div className="relative">
+            <Loader2 className="h-16 w-16 animate-spin text-blue-600 mx-auto mb-4" />
+            <Sparkles className="h-6 w-6 text-yellow-500 absolute top-0 right-0 animate-pulse" />
+          </div>
+          <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Loading your workspace...</p>
+          <p className="text-sm text-muted-foreground mt-1">Preparing something awesome</p>
         </div>
       </div>
     );
@@ -184,73 +188,78 @@ export function Board() {
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900">
-        <div className="border-b bg-white/50 dark:bg-gray-900/50 backdrop-blur-xl">
-          <div className="container py-8  mx-auto">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-              <div className="space-y-4">
-               
-
-                <div className="flex gap-4 flex-wrap">
-                  <div className="px-4 py-2 rounded-lg bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800">
-                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                      {totalTasks}
-                    </div>
-                    <div className="text-xs text-blue-600/80 dark:text-blue-400/80">
-                      Total Tasks
-                    </div>
-                  </div>
-                  <div className="px-4 py-2 rounded-lg bg-green-100 dark:bg-green-950 border border-green-200 dark:border-green-800">
-                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                      {completedTasks}
-                    </div>
-                    <div className="text-xs text-green-600/80 dark:text-green-400/80">
-                      Completed
-                    </div>
-                  </div>
-                  <div className="px-4 py-2 rounded-lg bg-purple-100 dark:bg-purple-950 border border-purple-200 dark:border-purple-800">
-                    <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                      {completionRate}%
-                    </div>
-                    <div className="text-xs text-purple-600/80 dark:text-purple-400/80">
-                      Completion
-                    </div>
-                  </div>
+        {/* Hero Stats Section */}
+        <div className="border-b border-gray-200/50 dark:border-gray-800/50 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl shadow-sm">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
+                <Target className="h-8 w-8 text-white/80 mb-3" />
+                <div className="relative">
+                  <div className="text-4xl font-bold text-white mb-1">{totalTasks}</div>
+                  <div className="text-blue-100 text-sm font-medium">Total Tasks</div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="relative flex-1 sm:w-64">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search tasks..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-9 bg-white dark:bg-gray-800"
-                  />
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
+                <Sparkles className="h-8 w-8 text-white/80 mb-3" />
+                <div className="relative">
+                  <div className="text-4xl font-bold text-white mb-1">{completedTasks}</div>
+                  <div className="text-green-100 text-sm font-medium">Completed</div>
                 </div>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setFilterPriority(filterPriority === "all" ? "high" : "all")}
-                    className={filterPriority !== "all" ? "bg-primary text-primary-foreground" : ""}
-                  >
-                    <Filter className="h-4 w-4" />
-                  </Button>
-                  <Button onClick={() => setIsAddModalOpen(true)} className="gap-2">
-                    <Plus className="h-4 w-4" />
-                    <span className="hidden sm:inline">New Task</span>
-                  </Button>
+              </div>
+
+              <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
+                <TrendingUp className="h-8 w-8 text-white/80 mb-3" />
+                <div className="relative">
+                  <div className="text-4xl font-bold text-white mb-1">{completionRate}%</div>
+                  <div className="text-purple-100 text-sm font-medium">Success Rate</div>
                 </div>
               </div>
             </div>
 
+            {/* Search and Actions */}
+            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+              <div className="relative flex-1">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  placeholder="Search tasks by title or description..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 h-12 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="flex gap-3">
+                <Button
+                  variant={filterPriority !== "all" ? "default" : "outline"}
+                  size="lg"
+                  onClick={() => setFilterPriority(filterPriority === "all" ? "high" : "all")}
+                  className="h-12 px-6 rounded-xl shadow-sm hover:shadow-md transition-all"
+                >
+                  <Filter className="h-5 w-5 mr-2" />
+                  Filter
+                </Button>
+                <Button 
+                  onClick={() => setIsAddModalOpen(true)} 
+                  size="lg"
+                  className="h-12 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                >
+                  <Plus className="h-5 w-5 mr-2" />
+                  New Task
+                </Button>
+              </div>
+            </div>
+
             {filterPriority !== "all" && (
-              <div className="mt-4 flex gap-2 items-center">
-                <span className="text-sm text-muted-foreground">Filtered by:</span>
+              <div className="mt-4 flex gap-2 items-center animate-in fade-in slide-in-from-top-2">
+                <span className="text-sm text-muted-foreground font-medium">Active Filter:</span>
                 <Badge
                   variant="secondary"
-                  className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                  className="px-3 py-1 cursor-pointer hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-950 dark:hover:text-red-400 transition-colors rounded-full"
                   onClick={() => setFilterPriority("all")}
                 >
                   {filterPriority} priority ✕
@@ -260,7 +269,8 @@ export function Board() {
           </div>
         </div>
 
-        <div className="container py-8  mx-auto">
+        {/* Kanban Board */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <DndContext
             sensors={sensors}
             onDragStart={handleDragStart}
@@ -304,23 +314,28 @@ export function Board() {
             </DragOverlay>
           </DndContext>
 
+          {/* Empty State */}
           {filteredTasks.length === 0 && (
-            <div className="text-center py-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <LayoutGrid className="h-8 w-8 text-primary" />
+            <div className="text-center py-20 animate-in fade-in zoom-in duration-500">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-6 shadow-lg">
+                <LayoutGrid className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">
-                {searchQuery ? "No tasks found" : "No tasks yet"}
+              <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+                {searchQuery ? "No tasks found" : "Your board is empty"}
               </h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-6 text-lg max-w-md mx-auto">
                 {searchQuery
-                  ? "Try adjusting your search or filters"
-                  : "Create your first task to get started"}
+                  ? "Try adjusting your search or filters to find what you're looking for"
+                  : "Start organizing your work by creating your first task"}
               </p>
               {!searchQuery && (
-                <Button onClick={() => setIsAddModalOpen(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create Task
+                <Button 
+                  onClick={() => setIsAddModalOpen(true)}
+                  size="lg"
+                  className="rounded-xl shadow-lg hover:shadow-xl transition-all bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700"
+                >
+                  <Plus className="h-5 w-5 mr-2" />
+                  Create Your First Task
                 </Button>
               )}
             </div>
